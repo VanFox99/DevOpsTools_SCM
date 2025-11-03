@@ -17,7 +17,7 @@
          "value":"WORKLOAD_NAMESPACE"
       },
       "artifact.nameSpaceGateway":{
-         "value":"GW_NAMESPACE"
+         "value":"TRAFIC_TYPE_NAMESPACE"
       },
       "artifact.pathLiveness":{
          "value":"$(artifact.contextPath)HEALTH_CHECK_LIVENESS_PATH"
@@ -41,13 +41,13 @@
          "value":"2"
       },
       "branchConfig":{
-         "value":"master"
+         "value":"BRANCH_CONFIG"
       },
       "hpaMaxReplicas":{
          "value":"4"
       },
       "k8ManifestPath":{
-         "value":"frameworks/k8Templates/k8s-manifest-template-gke-npv.yaml"
+         "value":"k8PATH"
       },
       "port":{
          "value":"8080"

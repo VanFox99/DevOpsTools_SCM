@@ -1,4 +1,5 @@
-echo -e "\e[32mAplicacion cd-construction.sh\e[0m"
+echo -ne "\033]0;Aplicacion CD-Construction\007"
+echo -e "\e[32mCD Construction\e[0m"
 echo ""
 read -r -p "Ingrese nombre de pipeline CI - ejemplo: api-servicio-pipeline-ci (enter for default value): " CI_NAME
 CI_NAME=${CI_NAME:-api-servicio-pipeline-ci}

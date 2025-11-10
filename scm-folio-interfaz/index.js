@@ -96,7 +96,7 @@ function generarUrls(ofertaMap, respuesta) {
 }
 
 function main() {
-    console.log("Bienvenido a la interfaz SCM 1.0.0");
+    console.log("Bienvenido a la interfaz SCM 1.1.0");
     const respuesta = prompt("¿Qué necesitas hacer?: ");
     const id = respuestaDeteccion(respuesta);
     const urlGenerada = generarUrls(ofertas, respuesta);

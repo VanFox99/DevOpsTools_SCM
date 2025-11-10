@@ -1,5 +1,5 @@
-import promptSync from 'prompt-sync';
-const prompt = promptSync();
+const prompt = require('prompt-sync')();
+const open = require('open').default;
 
 const urlBase = 'https:\/\/servicedesk.coppel.com\/incident\/create\/index\/category\/ID'
 
@@ -82,12 +82,14 @@ function generarUrls(ofertaMap, respuesta) {
     if (!respuesta) {
         process.exit(1);
     }
-    const resultado = Array.from(ofertaMap.values()).find(oferta =>
+    const resultado = Array.from(ofertaMap.entries()).find(([key, oferta]) =>
         oferta.nombre.toLowerCase().includes(respuesta.toLowerCase())
     );
     if (resultado) {
-        const urlFinal = urlBase.replace('ID', resultado.id);
-        return console.log(`Oferta encontrada: ${resultado.nombre}\nURL generada: ${urlFinal}`);
+        const [id, oferta] = resultado;
+        const urlFinal = urlBase.replace('ID', id);
+        open(urlFinal);
+        return console.log(`Oferta encontrada: ${oferta.nombre}\nURL generada: ${urlFinal}`);
     } else {
         console.log("No se encontró coincidencia.");
     }

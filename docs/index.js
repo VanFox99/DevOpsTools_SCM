@@ -1,4 +1,20 @@
-const urlBase = 'https:\/\/servicedesk.coppel.com\/incident\/create\/index\/category\/ID'
+const urlBase = "https:\/\/servicedesk.coppel.com\/incident\/create\/index\/category\/ID";
+const protocol = window.location.protocol + '//';
+const arrayPaginas = [
+    { nombre: "ppm", url: "ppm.softtek.com/" },
+    { nombre: "azure", url: "dev.azure.com/" },
+    { nombre: "azure-portal", url: "portal.azure.com/" },
+    { nombre: "jira", url: "coppelmx.atlassian.net/jira/" },
+    { nombre: "gcp-console", url: "console.cloud.google.com/" },
+    { nombre: "aws-console", url: "d-9067d0f523.awsapps.com/start/#/?tab=accounts/" },
+    { nombre: "git-hub", url: "github.com/enterprises/coppel/" },
+    { nombre: "softtek-home", url: "onesofttek.sharepoint.com/sites/home/" },
+    { nombre: "dev-guide", url: "sites.google.com/coppel.com/developers/" },
+    { nombre: "arq-integracion", url: "sites.google.com/coppel.com/arq-integracion/" },
+    { nombre: "arq-ti", url: "sites.google.com/coppel.com/daetid" },
+    { nombre: "ambientacion-guide", url: "docs.google.com/document/d/1SIyBbmwZJlzyvFkoyQtqtWBWWpt2vs4eu0_oD3U8Kw8/edit?tab=t.0" },
+    { nombre: "gestion-practicas", url: "sites.google.com/coppel.com/smo/pr%C3%A1cticas/" }
+];
 
 const ofertas = new Map([
     //Cloud Operations
@@ -55,6 +71,7 @@ const ofertas = new Map([
     [8209, { nombre: "Gesti\u00f3n de Usuarios", tags: ["active directory", "ad", "grupos", "permisos", "altas usuarios", "listas de distribucion"] }],
 
     //Linux Operations
+    [6967, { nombre: "Alta de regla de comunicaci\u00f3n a redes protegidas", tags: ["alcance onpremise", "regla onpremise", "onpermise"] }],
     [10369, { nombre: "ABC Dns On Premise", tags: ["dns local", "bind", "named", "zona dns", "registros dns"] }],
     [12954, { nombre: "Alertas Eventos Herramientas de Monitoreo", tags: ["monitoreo", "alertas", "nagios", "zabbix", "grafana", "eventos", "notificaciones"] }],
     [3398, { nombre: "An\u00e1lisis y diagn\u00f3stico de Sistemas Operativos linux", tags: ["troubleshooting", "diagnostico", "error linux", "analisis so", "fallo sistema"] }],
@@ -114,6 +131,24 @@ function generarUrls(ofertas, respuestaLower) {
     }
 }
 
+function redireccionMenu(nombrePagina) {
+    const pagina = arrayPaginas.find(p => p.nombre === nombrePagina);
+    if (pagina && pagina.url) {
+        window.open(protocol + pagina.url, '_blank');
+    } else {
+        mostrarMensaje("Página no encontrada", false);
+    }
+}
+
+function copiarNota() {
+    const notas = document.getElementById('notas');
+    notas.select();
+    navigator.clipboard.writeText(notas.value);
+    mostrarMensaje("Nota copiada");
+    notas.value = '';
+  }
+
+//Evento principal
 document.getElementById('form-busqueda').addEventListener('submit', function (event) {
     event.preventDefault();
     const input = document.getElementById('input-oferta');

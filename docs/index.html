@@ -15,15 +15,44 @@
         <div class="logo-header">
             <img src="images\scm_logo.png" alt="Logo de SCM Folio Interfaz" class="logo-image" />
             <h1>Bienvenido a SCM Folio Interfaz</h1>
+            <div class="header-menus">
+                <div id="menu-utilidadesSecundarias" class="menu-utilidadesSecundarias">
+                    <input type="button" class="boton-menu" value="PPM" onclick="redireccionMenu('ppm')" />
+                    <input type="button" class="boton-menu" value="Softtek" onclick="redireccionMenu('softtek-home')" />
+                </div>
+                <div id="menu-utilidadesPrincipales" class="menu-utilidadesPrincipales">
+                    <input type="button" class="boton-menu" value="GCP" onclick="redireccionMenu('gcp-console')" />
+                    <input type="button" class="boton-menu" value="AWS" onclick="redireccionMenu('aws-console')" />
+                    <input type="button" class="boton-menu" value="Azure" onclick="redireccionMenu('azure')" />
+                    <input type="button" class="boton-menu" value="GitHub" onclick="redireccionMenu('git-hub')" />
+                    <input type="button" class="boton-menu" value="Jira" onclick="redireccionMenu('jira')" />
+                </div>
+                <div id="menu-documentacion" class="menu-documentacion">
+                    <input type="button" class="boton-menu" value="Dev-Guide" onclick="redireccionMenu('dev-guide')" />
+                    <input type="button" class="boton-menu" value="Arq. Integracion"
+                        onclick="redireccionMenu('arq-integracion')" />
+                    <input type="button" class="boton-menu" value="Ambientacion-Guide"
+                        onclick="redireccionMenu('ambientacion-guide')" />
+                    <input type="button" class="boton-menu" value="Gestion-Cambio"
+                        onclick="redireccionMenu('gestion-practicas')" />
+                </div>
+            </div>
         </div>
     </header>
     <main>
-        <p>Esta es la interfaz principal para la gestión de folios de operacion en el sistema Service Desk.</p>
-        <form id="form-busqueda" action="">
-            <input id="input-oferta" class="input-busqueda" type="text" required
-                pattern="[A-Za-z\s]{3,20}" maxlength="20" placeholder="¿Que necesitas hacer? ejemplo: Alcance" />
-        </form>
-        <div id="mensaje" class="mensaje"></div>
+        <p>Esta es la interfaz principal para la gestión de actividades de operacion en el sistema Service Desk.</p>
+        <div class="busqueda-notas">
+            <form id="form-busqueda" action="">
+                <input id="input-oferta" class="input-busqueda" type="text" required pattern="[A-Za-z\s]{3,20}"
+                    maxlength="30" placeholder="¿Que necesitas hacer? ejemplo: Alcance" />
+                <div id="mensaje" class="mensaje"></div>
+            </form>
+        </div>
+        <div class="zona-notas">
+            <label for="notas" style="font-size: small;">Zona de notas (copy/paste):</label><br>
+            <textarea id="notas" rows="20" cols="100" placeholder="Escribe o pega tus notas..."></textarea>
+            <button class="boton-menu" onclick="copiarNota()">Copy</button>
+        </div>
         <script src="index.js"></script>
     </main>
     <footer>

@@ -103,14 +103,14 @@ function mostrarMensaje(texto, esExito = true, tiempo = 5000) {
 }
 function removePlaceholder(element) {
     if (element.innerText.trim() === "Escribe o pega tus notas aquí...") {
-        element.innerText = ""; // Limpia el texto del placeholder
-        element.classList.remove("placeholder"); // Remueve la clase de estilo
+        element.innerText = "";
+        element.classList.remove("placeholder");
     }
 }
 function addPlaceholder(element) {
     if (element.innerText.trim() === "") {
-        element.innerText = "Escribe o pega tus notas aquí..."; // Restaura el placeholder
-        element.classList.add("placeholder"); // Agrega la clase de estilo
+        element.innerText = "Escribe o pega tus notas aquí...";
+        element.classList.add("placeholder");
     }
 }
 
@@ -163,7 +163,7 @@ function copiarNota() {
     selection.addRange(range);
     document.execCommand('copy');
     notasDiv.innerHTML = '';
-    mostrarMensaje('Nota copiada en portapapeles', esExito = true, tiempo = 3000);
+    mostrarMensaje('Nota copiada en portapapeles', true, 3000);
 }
 
 //Eventos

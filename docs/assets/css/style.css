@@ -134,13 +134,13 @@ div#notas {
   border-radius: 5px;
   border: 1px solid #8dc6ff;
   background-color: #ffffff;
-  overflow: auto;
+  overflow-y: auto;
   word-wrap: break-word;
-  white-space: pre-wrap;
 }
 
-#notas.placeholder {
+div#notas.placeholder {
   color: #aaa;
   font-style: italic;
   text-align: left;
+  vertical-align: top;
 }

@@ -58,14 +58,15 @@ function generarMinuta() {
 
     // Datos de la minuta
     const titulo = prompt("Ingrese el título de la reunión:");
-    const asistentes = prompt("Ingrese los asistentes en formato Gmail (En su defectoseparados por comas):");
+    const asistentesInput = prompt("Ingrese los asistentes en formato Gmail (En su defectoseparados por comas):");
+    const asistentes = asistentesInput ? asistentesInput.split(',') : [];
 
     // Objeto constructor MinutaTemplate
     const minuta = new MinutaTemplate(
         "./images/softtek_logo.jpeg", // Ruta del logo
         titulo, // Título de la minuta
         undefined, // Fecha predeterminada
-        asistentes.split(','), // Convertir asistentes a un array
+        asistentes, // Array asistentes
         puntosTratados // Pasar el array de puntos tratados directamente
     );
 
@@ -151,8 +152,37 @@ function generarMinuta() {
             }
 
             // asistentes
-            pdf.text("Asistentes:", 10, logoY + logoHeight + 150);
-            pdf.text(safeAsistentes, 10, logoY + logoHeight + 160);
+            yPosition += 10;
+            pdf.text("Asistentes:", 10, yPosition);
+
+            // Verificar si hay asistentes
+            if (minuta.asistentes && minuta.asistentes.length > 0) {
+                const lineHeight = 5; // Altura de cada línea
+                const pageHeight = 297; // Altura de la página en mm (A4)
+                const marginBottom = 20; // Margen inferior
+                let currentY = yPosition + 10; // Posición Y inicial para los asistentes
+
+                // Iterar sobre los asistentes y colocarlos en una sola columna
+                minuta.asistentes.forEach((asistente, index) => {
+                    // Si la posición Y excede el límite de la página, agregar una nueva página
+                    if (currentY + lineHeight > pageHeight - marginBottom) {
+                        pdf.addPage();
+                        currentY = 10; // Reiniciar la posición Y en la nueva página
+                        pdf.text("Asistentes (continuación):", 10, currentY);
+                        currentY += 5;
+                        currentY += lineHeight;
+                    }
+
+                    // Agregar el asistente en la posición actual
+                    pdf.setFont("Helvetica", "normal");
+                    pdf.text(`• ${asistente}`, 10, currentY);
+                    currentY += lineHeight;
+                });
+
+            } else {
+                // Si no hay asistentes, mostrar un mensaje
+                pdf.text(safeAsistentes, 10, yPosition + 10);
+            }
 
             // Guardar el PDF
             const sanitizedTitle = minuta.titulo.replace(/[\/\\?%*:|"<>]/g, '-');
